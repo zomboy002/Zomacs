@@ -2,7 +2,7 @@
 #+REVEAL_THEME: night
 #+OPTIONS: timestamp:nil toc:1 num:nil
 :END:
-#+TITLE: Config ORG
+#+TITLE: Zomboy Emacs
 #+STARTUP: overview
 #+CREATORz: Zomboy
 #+LANGUAGE: en
