@@ -1,9 +1,10 @@
 # -*- mode: snippet -*-
 # name: Title 
-# key: <tt
+# key: <tt>
 # --
 
 #+TITLE: ${1:title}
 #+AUTHOR: Zomboy
+#+DATE ${2:date}
 
 $0
