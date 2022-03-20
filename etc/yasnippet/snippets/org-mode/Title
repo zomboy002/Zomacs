@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: Title 
+# key: <tt
+# --
+
+#+TITLE: ${1:title}
+#+AUTHOR: Zomboy
+
+$0
