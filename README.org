@@ -1,1 +1,522 @@
-config.org
+#+TITLE: Zomboy Emacs
+#+STARTUP: overview
+#+CREATORz: Zomboy
+#+LANGUAGE: en
+[[./img/Emacs-Screen.png]]
+
+* Setting
+** Electric
+#+BEGIN_SRC emacs-lisp
+  (setq electric-pair-pairs '(
+                             (?\{ . ?\})
+                             (?\( . ?\))
+                             (?\[ . ?\])
+                             (?\" . ?\")
+                             ))
+  (electric-pair-mode t)
+#+END_SRC
+
+** System Load
+#+BEGIN_SRC emacs-lisp
+  (setq display-time-default-load-average nil)
+#+END_SRC
+
+** Disable Bell
+#+BEGIN_SRC emacs-lisp
+  (setq ring-bell-function 'ignore)
+#+END_SRC
+
+** Diminish Mode
+#+BEGIN_SRC emacs-lisp
+(use-package diminish
+  :ensure t
+  :init
+  (diminish 'which-key-mode)
+  (diminish 'linum-relative-mode)
+  (diminish 'hungry-delete-mode)
+  (diminish 'visual-line-mode)
+  (diminish 'subword-mode)
+  (diminish 'beacon-mode)
+  (diminish 'irony-mode)
+  (diminish 'page-break-lines-mode)
+  (diminish 'auto-revert-mode)
+  (diminish 'rainbow-delimiters-mode)
+  (diminish 'rainbow-mode)
+  (diminish 'yas-minor-mode)
+  (diminish 'flycheck-mode)
+  (diminish 'helm-mode))
+#+END_SRC
+
+** Keep Files Clean
+#+BEGIN_SRC emacs-lisp
+  (setq backup-directory-alist `(("." . ,(expand-file-name "tmp/backups/" user-emacs-directory))))
+#+END_SRC
+
+** Make Scroll Nicer
+#+BEGIN_SRC emacs-lisp
+  (setq scroll-conservatively 100)
+#+END_SRC
+
+** Set UTF-8 Encoding
+#+BEGIN_SRC emacs-lisp
+  (setq locale-coding-system 'utf-8)
+  (set-terminal-coding-system 'utf-8)
+  (set-keyboard-coding-system 'utf-8)
+  (set-selection-coding-system 'utf-8)
+  (prefer-coding-system 'utf-8)
+#+END_SRC
+
+** Kill Buffer Quickly
+#+BEGIN_SRC emacs-lisp
+  (setq kill-buffer-query-functions (delq 'process-kill-buffer-query-function kill-buffer-query-functions))
+#+END_SRC
+
+** Change yes-or-no into y-or-n 
+#+BEGIN_SRC emacs-lisp
+  (defalias 'yes-or-no-p 'y-or-n-p)
+#+END_SRC
+
+** Uses Space Instead Of Tabs For Indentation
+#+BEGIN_SRC emacs-lisp
+  (setq-default indent-tabs-mode nil)
+#+END_SRC
+
+* Org Mode
+** Setting
+#+BEGIN_SRC emacs-lisp
+    (setq org-hide-emphasis-markers t)
+    (setq org-ellipsis " ▾")
+    (setq org-src-fontify-natively t)
+    (setq org-src-tab-acts-natively t)
+    (setq org-confirm-babel-evaluate nil)
+    (setq org-export-with-smart-quotes t)
+    (setq org-src-window-setup 'current-window)
+    (setq org-startup-folded t)
+    (setq org-startup-indented t)
+    (setq org-startup-with-inline-images t)
+    (add-hook 'org-mode-hook 'org-indent-mode)
+#+END_SRC
+
+** Evil Org
+#+BEGIN_SRC emacs-lisp
+  (use-package evil-org
+    :ensure t
+    :after (evil org)
+    :config
+    (add-hook 'org-mode-hook 'evil-org-mode)
+    (add-hook 'evil-org-mode-hook
+              (lambda ()
+                (evil-org-set-key-theme '(navigation insert textobjects additional calendar))))
+    (require 'evil-org-agenda)
+    (evil-org-agenda-set-keys))
+#+END_SRC
+
+** Org Roam
+#+BEGIN_SRC emacs-lisp
+  (use-package org-roam
+    :ensure t
+    :init
+    (setq org-roam-v2-ack t)
+    :custom
+    (org-roam-directory "~/RoamNotes")
+    (org-roam-completion-everywhere t)
+    :bind (("C-c n l" . org-roam-buffer-toggle)
+           ("C-c n f" . org-roam-node-find)
+           ("C-c n i" . org-roam-node-insert)
+           :map org-mode-map
+           ("C-M-i" . completion-at-point)
+           :map org-roam-dailies-map)
+    :config
+    (org-roam-setup))
+#+END_SRC
+
+** Superstar
+#+BEGIN_SRC emacs-lisp
+  (use-package org-superstar 
+    :ensure t
+    :init
+    (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
+    (dolist (face '((org-level-1 . 1.5)
+                    (org-level-2 . 1.3)
+                    (org-level-3 . 1.2)
+                    (org-level-4 . 1.2)
+                    (org-level-5 . 1.2)
+                    (org-level-6 . 1.2)
+                    (org-level-7 . 1.2)
+                    (org-level-8 . 1.2)))
+      (set-face-attribute (car face) nil :font "FiraCode Nerd Font" :weight 'medium :height (cdr face))))
+#+END_SRC
+
+* Packages
+** Appearence
+*** Theme
+#+BEGIN_SRC emacs-lisp
+    (use-package doom-themes
+      :ensure t)
+    (load-theme 'doom-badger t)
+#+END_SRC
+
+*** Icons
+#+BEGIN_SRC emacs-lisp
+(use-package all-the-icons-dired
+  :ensure t
+  :init (add-hook 'dired-mode-hook 'all-the-icons-dired-mode))
+
+(use-package all-the-icons
+      :ensure t)
+#+END_SRC
+
+*** Layout
+#+BEGIN_SRC emacs-lisp
+  (scroll-bar-mode -1)        
+  (tool-bar-mode -1)           
+  (tooltip-mode -1)           
+  (fringe-mode -1)         
+  (menu-bar-mode -1)
+  (visual-line-mode 1)
+#+END_SRC
+
+*** Beacon Mode
+#+BEGIN_SRC emacs-lisp
+(blink-cursor-mode -1)
+
+(use-package beacon ;; This applies a beacon effect to the highlighted line
+ :ensure t
+   :config
+   (beacon-mode 1))
+#+END_SRC
+
+*** Disable Relative Mode In Some Mode
+#+BEGIN_SRC emacs-lisp
+  (dolist (mode '(org-mode-hook
+                  term-mode-hook
+                  shell-mode-hook
+                          treemacs-mode-hook
+                  eshell-mode-hook))
+    (add-hook mode (lambda () (display-line-numbers-mode 0))))
+#+END_SRC
+
+*** Line Numbers Types
+#+BEGIN_SRC emacs-lisp 
+(setq display-line-numbers-type 'relative)
+#+END_SRC
+
+*** Remove Lame Startup Screen
+#+BEGIN_SRC emacs-lisp
+(setq inhibit-startup-message t)
+#+END_SRC
+
+*** Dashboard
+#+BEGIN_SRC emacs-lisp
+  (use-package dashboard
+    :ensure t
+    :init
+    (setq dashboard-show-shortcuts nil)
+    (setq dashboard-set-file-icons t)
+    (setq dashboard-banner-logo-title "Welcome To A Better Text Editor!")
+    (setq dashboard-startup-banner "~/.emacs.d/img/icon.png")  
+    (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
+    (setq dashboard-items '((recents  . 5)
+                            (bookmarks . 5)))
+    (dashboard-setup-startup-hook))
+
+#+END_SRC
+
+*** Modeline
+#+BEGIN_SRC emacs-lisp
+    (use-package doom-modeline
+      :ensure t
+      :init
+      (setq doom-modeline-buffer-file-name-style 'truncate-upto-project)
+      (setq doom-modeline-height 33)
+      (setq doom-modeline-bar-width 7) 
+      (setq doom-modeline-buffer-encoding nil)
+      (line-number-mode -1)
+      (doom-modeline-mode 1))
+#+END_SRC
+
+*** Modeline Accessories
+**** Display Time & Icon
+#+BEGIN_SRC emacs-lisp
+  (setq display-time-format " %b %d  %l:%M  "
+        display-time-default-load-average nil)
+        (display-time-mode 1)
+#+END_SRC
+
+**** Fancy Battery
+#+BEGIN_SRC emacs-lisp
+  (use-package fancy-battery
+    :ensure t
+    :config
+    (setq fancy-battery-show-percentage t)
+    (setq battery-update-interval 15)
+    (fancy-battery-mode))
+#+END_SRC
+
+*** Font
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'default-frame-alist '(font . "firacode nerd font-13"))
+#+END_SRC
+
+*** Hightlight Matching Braces
+#+BEGIN_SRC emacs-lisp
+  (use-package paren
+    :ensure nil
+    :init
+    (set-face-attribute 'show-paren-match-expression nil :background "#363e4a")
+    (show-paren-mode 1))
+#+END_SRC
+
+** Gmch
+#+BEGIN_SRC emacs-lisp
+    (use-package gcmh
+      :ensure t
+      :diminish gcmh-mode
+      :config
+      (setq gcmh-idle-delay 5
+            gcmh-high-cons-threshold (* 16 1024 1024))  ; 16mb
+      (gcmh-mode 1))
+
+    (add-hook 'emacs-startup-hook
+              (lambda ()
+		(setq gc-cons-percentage 0.1))) ;; Default value for `gc-cons-percentage'
+
+    (add-hook 'emacs-startup-hook
+              (lambda ()
+		(message "Emacs ready in %s with %d garbage collection s."
+			 (format "%.2f seconds"
+				 (float-time
+				  (time-subtract after-init-time before-init-time)))
+			 gcs-done)))
+#+END_SRC
+
+** Rainbow
+*** Rainbow
+#+BEGIN_SRC emacs-lisp
+  (use-package rainbow-mode
+    :ensure t
+    :init (add-hook 'prog-mode-hook 'rainbow-mode))
+#+END_SRC
+
+*** Rainbow Delimeter
+#+BEGIN_SRC emacs-lisp
+  (use-package rainbow-delimiters
+    :ensure t
+    :init
+    (rainbow-delimiters-mode 1))
+#+END_SRC
+
+** Treemacs
+#+BEGIN_SRC emacs-lisp
+  (use-package treemacs
+    :ensure t
+    :bind (("M-o" . treemacs)
+           ("M-t" . treemacs-select-window))
+    :config
+    (setq treemacs-is-never-other-window t)
+    (setq treemacs-show-hidden-files t))
+#+END_SRC
+
+** SlideShows
+#+BEGIN_SRC emacs-lisp
+  (use-package ox-reveal
+    :ensure t)
+  (setq org-reveal-root "https://cdn.jsdelivr.net/npm/reveal.js")
+  (setq org-reveal-mathjax t)
+
+  (use-package htmlize
+    :ensure t)
+#+END_SRC
+
+** Emacs Completions
+*** Company Mode
+#+BEGIN_SRC emacs-lisp
+  (use-package company
+    :ensure t
+    :config
+    (setq company-idle-delay 1)
+    (setq company-minimum-prefix-length 3)
+    :init
+    (company-mode 1))
+
+  (with-eval-after-load 'company
+    (define-key company-active-map (kbd "M-n") nil)
+    (define-key company-active-map (kbd "M-p") nil)
+    (define-key company-active-map (kbd "C-n") #'company-select-next)
+    (define-key company-active-map (kbd "C-p") #'company-select-previous)
+    (define-key company-active-map (kbd "SPC") #'company-abort))
+#+END_SRC
+
+*** Vertico
+#+BEGIN_SRC emacs-lisp
+  (use-package vertico
+    :ensure t
+    :init
+    (vertico-mode))
+#+END_SRC
+
+*** Orderless
+#+BEGIN_SRC emacs-lisp
+  (use-package orderless
+    :ensure t
+    :custom (completion-styles '(orderless)))
+#+END_SRC
+
+*** Consult
+#+BEGIN_SRC emacs-lisp
+  (use-package consult
+    :ensure t
+    :bind
+    ("M-b" . 'consult-bookmark)
+    ("C-s" . 'consult-line)
+    ("M-y" . 'consult-yank-pop))
+#+END_SRC
+
+*** Marginalia
+#+BEGIN_SRC emacs-lisp
+  (use-package marginalia
+    :ensure t)
+  (marginalia-mode)
+#+END_SRC
+
+** Writeroom Mode
+#+BEGIN_SRC emacs-lisp
+    (use-package writeroom-mode
+      :ensure t
+      :config
+      (setq writeroom-maximize-window nil
+            writeroom-header-line "                                                              Writer Mode"  
+            writeroom-mode-line nil
+            writeroom-global-effects nil) 
+      (setq writeroom-width 80))
+#+END_SRC
+
+** Sudo Edit
+#+BEGIN_SRC emacs-lisp
+  (use-package sudo-edit
+    :ensure t)
+#+END_SRC
+
+** YASnippet
+#+BEGIN_SRC emacs-lisp
+    (use-package yasnippet
+      :ensure t
+      :config
+      (setq yas-snippet-dirs '("~/.emacs.d/etc/yasnippet/snippets"))
+      (yas-global-mode 1))
+#+END_SRC
+
+** Which key
+#+BEGIN_SRC emacs-lisp
+  (use-package which-key
+    :config 
+      (setq which-key-idle-delay 0.3)
+      (setq which-key-popup-type 'frame)
+      (which-key-mode)
+      (which-key-setup-minibuffer)
+      (set-face-attribute 'which-key-local-map-description-face nil 
+         :weight 'bold)
+      :ensure t)
+#+END_SRC
+
+** Evil Mode
+#+BEGIN_SRC emacs-lisp
+  (use-package evil
+    :ensure t  
+    :init
+    (setq evil-want-keybinding t)
+    (setq evil-want-fine-undo t)
+    (setq evil-want-keybinding nil)
+    :config
+    (evil-set-initial-state 'dashboard-mode 'motion)
+    (evil-set-initial-state 'debugger-mode 'motion)
+    (evil-set-initial-state 'pdf-view-mode 'motion)
+    (evil-mode 1))
+
+  (use-package evil-collection
+    :ensure t
+    :after evil
+    :init
+    (evil-collection-init))
+#+END_SRC
+
+** Terminal
+#+BEGIN_SRC emacs-lisp
+  (use-package vterm
+    :ensure t
+    :init
+    (global-set-key (kbd "<S-return>") 'vterm))
+#+END_SRC
+
+** General Keybinding
+#+BEGIN_SRC emacs-lisp
+  (use-package general
+    :ensure t
+    :bind ("C-q" . 'kill-current-buffer)
+    :init
+    (general-evil-setup t))
+#+END_SRC
+
+* Keybinding
+** Reload Config
+#+BEGIN_SRC emacs-lisp
+  (defun config-reload ()
+    (interactive)
+    (org-babel-load-file (expand-file-name "~/.emacs.d/init.el")))
+  (global-set-key (kbd "C-c r") 'config-reload)
+#+END_SRC
+
+** Zoom In/Out
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "C-=") 'text-scale-increase)
+  (global-set-key (kbd "C--") 'text-scale-decrease)
+#+END_SRC
+
+** Master Keybinding
+*** Prefix
+#+BEGIN_SRC emacs-lisp
+  (general-define-key
+   :states '(normal motion visual)
+   :keymaps 'override
+   :prefix "SPC"
+#+END_SRC
+*** Buffers
+#+BEGIN_SRC emacs-lisp
+  "b"  '(nil :which-key "buffer")
+  "bi" '(consult-buffer :which-key "switch buffers")
+  "bs" '(bookmark-set :which-key "set bookmark")
+  "br" '(bookmark-delete :which-key "delete bookmark") 
+  "br" '(revert-buffer :which-key "revert buffer") 
+#+END_SRC
+*** Files
+#+BEGIN_SRC emacs-lisp
+   "f"  '(nil :which-key "files")
+  "."  '(find-file :which-key "files")
+  "fr" '(counsel-recentf :which-key "recent files")
+  "fR" '(rename-file :which-key "rename file")
+  "fu" '(sudo-edit-find-file :which-key "sudo find file")
+  "fs" '(save-buffer :which-key "save buffer")
+#+END_SRC
+*** Toggles
+#+BEGIN_SRC emacs-lisp
+  "t" '(nil :which-key "toggles")
+  "tb" '(display-battery-mode :which-key "toggle battery")
+  "tl" '(display-line-numbers-mode :which-key "display line number")
+  "tt" '(consult-theme :which-key "load theme")
+  "tw" '(writeroom-mode :which-key "writeroom-mode")
+  "tR" '(read-only-mode :which-key "read only mode")
+#+END_SRC
+*** Windows
+#+BEGIN_SRC emacs-lisp
+  "w" '(nil :which-key "window")
+  "wN" '(make-frame :which-key "make frame")
+  "wd" '(delete-other-windows :which-key "delete other window")
+  "wc" '(evil-window-delete :which-key "delete window")
+  "w-" '(evil-window-split :which-key "split below")
+  "w/" '(evil-window-vsplit :which-key "split right")
+  "wl" '(evil-window-right :which-key "evil-window-right")
+  "wh" '(evil-window-left :which-key "evil-window-left")
+  "wj" '(evil-window-down :which-key "evil-window-down")
+  "wk" '(evil-window-up :which-key "evil-window-up"))
+#+END_SRC
+ 
