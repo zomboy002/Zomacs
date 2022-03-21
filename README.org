@@ -4,20 +4,20 @@
 #+LANGUAGE: en
 [[./img/Emacs-Screen.png]]
 
-* TABLE OF CONTENTS                                                     :TOC:
+* Table Of Contents                                                    :TOC:
 + Setting
   * [[#Electric][Electric]]
-  * [[#System Load][system Load]]
-  * [[#Disable Bell][Disable Bell]]
-  * [[#Diminish Mode][Diminish Mode]]
-  * [[#Keep Files Clean][Keep Files Clean]]
-  * [[#Make Scroll Nicer][Make Scroll Nicer]]
-  * [[#Set UTF-8 Encoding][Set UTF-8 Encoding]]
-  * [[#Kill Buffer Quickly][Kill Buffer Quickly]]
-  * [[#Change yes-or-no into y-or-n][Change yes-or-no into y-or-n]]
-  * [[#Uses Space Instead Of TAbs For Indentation][Uses Space Instead Of Tabs For Indentation]]
+  * [[#System-Load][system Load]]
+  * [[#Disable-Bell][Disable Bell]]
+  * [[#Diminish-Mode][Diminish Mode]]
+  * [[#Keep-Files-Clean][Keep Files Clean]]
+  * [[#Make-Scroll-Nicer][Make Scroll Nicer]]
+  * [[#Set-UTF-8-Encoding][Set UTF-8 Encoding]]
+  * [[#Kill-Buffer-Quickly][Kill Buffer Quickly]]
+  * [[#Change-yes-or-no-into-y-or-n][Change yes-or-no into y-or-n]]
+  * [[#Uses-Space-Instead-Of-Tabs-For-Indentation][Uses Space Instead Of Tabs For Indentation]]
 + Org Mode
-  * [[#Common Settings][Common Settings]]
+  * [[#Common-Settings][Common Settings]]
   * [[#Evil Org][Evil Org]]
   * [[#Org-Roam][Org Roam]]
   * [[#Superstar][Superstar]]
