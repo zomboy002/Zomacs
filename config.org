@@ -7,8 +7,8 @@
 #+CREATORz: Zomboy
 #+LANGUAGE: en
 #+ATTR_HTML: :width 50% :alighn center
-[[./img/Emacs-Screen.png
-]]
+[[./img/Emacs-Screen.png]]
+
 * Table Of Contents                                                     :TOC:
 + Setting
   * [[#Auto-Pairs][Autor Pairs]]
