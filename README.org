@@ -4,7 +4,62 @@
 #+LANGUAGE: en
 [[./img/Emacs-Screen.png]]
 
-#+TOC: tables
+* TABLE OF CONTENTS                                                     :TOC:
++ Setting
+  * [[#Electric][Electric]]
+  * [[#System Load][system Load]]
+  * [[#Disable Bell][Disable Bell]]
+  * [[#Diminish Mode][Diminish Mode]]
+  * [[#Keep Files Clean][Keep Files Clean]]
+  * [[#Make Scroll Nicer][Make Scroll Nicer]]
+  * [[#Set UTF-8 Encoding][Set UTF-8 Encoding]]
+  * [[#Kill Buffer Quickly][Kill Buffer Quickly]]
+  * [[#Change yes-or-no into y-or-n][Change yes-or-no into y-or-n]]
+  * [[#Uses Space Instead Of TAbs For Indentation][Uses Space Instead Of Tabs For Indentation]]
++ Org Mode
+  * [[#Common Settings][Common Settings]]
+  * [[#Evil Org][Evil Org]]
+  * [[#Org-Roam][Org Roam]]
+  * [[#Superstar][Superstar]]
++ Packages
+  * [[#Appearenc][Appearence]] 
+    * [[#Theme][Theme]]
+    * [[#Icons][Icons]]
+    * [[#Layout][Layout]]
+    * [[#Beacon-Mode][Beacon Mode]]
+    * [[#Disable-Relative-Mode-In-Some-Mode][Disable Relative Mode In Some Mode]]
+    * [[#Line-Numbers-Types][Line Numbers Type]]
+    * [[#Remove-Lame-Startup][Remove Lame Startup]]
+    * [[#Dashboard][Dashboard]]
+    * [[#Modeline][Modeline]]
+      * [[#Modeline-Accessories][Modeline Accessories]]
+        * [[#Display-Time-&-Icon][Display Time & Icon]]
+        * [[#Fancy-Battery][Fancy Battery]]
+    * [[#Font][Font]]
+    * [[#Hightlight-Matching-Braces][Hightlight Matching Braces]]
+  * [[#Gmch][Gmch]]
+  * [[#Magit][Magit]]
+  * [[#Rainbow][Rainbow]] 
+    * [[#Rainbow-Delimeter][Rainbow Delimeter]]
+  * [[#Treemacs][Treemacs]] 
+  * [[#SlideShow][SlideShow]]
+  * [[#Emacs-Completions][Emacs Completions]]
+  * [[#Writetroom-Mode][Writeroom Mode]]
+  * [[#Sudo-Edit][Sudo Edit]]
+  * [[#YASnippet][YASnippet]]
+  * [[#Which-Key][Which Key]]
+  * [[#Evil-Mode][Evil Mode]]
+  * [[#Terminal][Terminal]]
+  * [[#General-Keybinding][General Keybinding]]
++ Keybinding
+  * [[#Reload-Config][Reload Config]]
+  * [[#Zoom-In/Out][Zoom In/Out]]
+  * [[#Master-Keybinding][Master Keybinding]]
+    * [[#Prefix][Prefix]]
+    * [[Buffers][Buffers]]
+    * [[#Files][Files]]
+    * [[#Toggles][Toggles]]
+    * [[#Windows][Windows]]
 
 * Setting
 ** Electric
@@ -198,7 +253,7 @@
     (add-hook mode (lambda () (display-line-numbers-mode 0))))
 #+END_SRC
 
-*** Line Numbers Types
+*** Line Numbers Type
 #+BEGIN_SRC emacs-lisp 
 (setq display-line-numbers-type 'relative)
 #+END_SRC
@@ -237,15 +292,15 @@
       (doom-modeline-mode 1))
 #+END_SRC
 
-*** Modeline Accessories
-**** Display Time & Icon
+**** Modeline Accessories
+***** Display Time & Icon
 #+BEGIN_SRC emacs-lisp
   (setq display-time-format " %b %d  %l:%M  "
         display-time-default-load-average nil)
         (display-time-mode 1)
 #+END_SRC
 
-**** Fancy Battery
+***** Fancy Battery
 #+BEGIN_SRC emacs-lisp
   (use-package fancy-battery
     :ensure t
@@ -292,8 +347,12 @@
 			 gcs-done)))
 #+END_SRC
 
+** Magit
+#+BEGIN_SRC emacs-lisp
+  (use-package magit
+  :ensure t)
+#+END_SRC
 ** Rainbow
-*** Rainbow
 #+BEGIN_SRC emacs-lisp
   (use-package rainbow-mode
     :ensure t
@@ -319,7 +378,7 @@
     (setq treemacs-show-hidden-files t))
 #+END_SRC
 
-** SlideShows
+** SlideShow
 #+BEGIN_SRC emacs-lisp
   (use-package ox-reveal
     :ensure t)
@@ -482,6 +541,7 @@
    :keymaps 'override
    :prefix "SPC"
 #+END_SRC
+
 *** Buffers
 #+BEGIN_SRC emacs-lisp
   "b"  '(nil :which-key "buffer")
@@ -490,6 +550,7 @@
   "br" '(bookmark-delete :which-key "delete bookmark") 
   "br" '(revert-buffer :which-key "revert buffer") 
 #+END_SRC
+
 *** Files
 #+BEGIN_SRC emacs-lisp
    "f"  '(nil :which-key "files")
@@ -499,6 +560,7 @@
   "fu" '(sudo-edit-find-file :which-key "sudo find file")
   "fs" '(save-buffer :which-key "save buffer")
 #+END_SRC
+
 *** Toggles
 #+BEGIN_SRC emacs-lisp
   "t" '(nil :which-key "toggles")
@@ -508,6 +570,7 @@
   "tw" '(writeroom-mode :which-key "writeroom-mode")
   "tR" '(read-only-mode :which-key "read only mode")
 #+END_SRC
+
 *** Windows
 #+BEGIN_SRC emacs-lisp
   "w" '(nil :which-key "window")
