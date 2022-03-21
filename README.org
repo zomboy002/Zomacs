@@ -4,6 +4,8 @@
 #+LANGUAGE: en
 [[./img/Emacs-Screen.png]]
 
+#+TOC: tables
+
 * Setting
 ** Electric
 #+BEGIN_SRC emacs-lisp
