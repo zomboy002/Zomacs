@@ -2,7 +2,9 @@
 #+STARTUP: overview
 #+CREATORz: Zomboy
 #+LANGUAGE: en
-[[./img/Emacs-Screen.png]]
+
+#+ATTR_HTML: :width 50% :alighn center
+[[./img/Emacs-Screen.png][Screenshot]]
 
 * Table Of Contents                                                    :TOC:
 + Setting
