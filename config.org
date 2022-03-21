@@ -6,10 +6,12 @@
 #+STARTUP: overview
 #+CREATORz: Zomboy
 #+LANGUAGE: en
-
+#+ATTR_HTML: :width 50% :alighn center
+[[./img/Emacs-Screen.png
+]]
 * Table Of Contents                                                     :TOC:
 + Setting
-  * [[#Electric][Electric]]
+  * [[#Auto-Pairs][Autor Pairs]]
   * [[#System-Load][system Load]]
   * [[#Disable-Bell][Disable Bell]]
   * [[#Diminish-Mode][Diminish Mode]]
@@ -65,7 +67,7 @@
     * [[#Windows][Windows]]
 
 * Setting
-** Electric
+** Auto Pairs
 #+BEGIN_SRC emacs-lisp
   (setq electric-pair-pairs '(
                              (?\{ . ?\})
