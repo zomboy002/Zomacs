@@ -4,7 +4,7 @@
 #+LANGUAGE: en
 
 #+ATTR_HTML: :width 50% :alighn center
-[[./img/Emacs-Screen.png][Screenshot]]
+[[./img/Emacs-Screen.png]]
 
 * Table Of Contents                                                    :TOC:
 + Setting
