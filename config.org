@@ -213,7 +213,7 @@
 #+BEGIN_SRC emacs-lisp
     (use-package doom-themes
       :ensure t)
-    (load-theme 'doom-badger t)
+    (load-theme 'doom-tokyo-night t)
 #+END_SRC
 
 *** Icons
@@ -271,10 +271,16 @@
   (use-package dashboard
     :ensure t
     :init
+    (add-hook 'after-init-hook 'dashboard-refresh-buffer)
+    (add-hook 'dashboard-mode-hook 'my/dashboard-banner)
+    (setq dashboard-set-init-info nil)
     (setq dashboard-show-shortcuts nil)
+    (setq dashboard-set-heading-icons t)
     (setq dashboard-set-file-icons t)
     (setq dashboard-banner-logo-title "Welcome To A Better Text Editor!")
-    (setq dashboard-startup-banner "~/.emacs.d/img/icon.png")  
+    (setq dashboard-startup-banner "~/.emacs.d/img/icon.png")
+    (setq dashboard-item-names '(("Recent Files:" . "Recent Files")
+                                 ("Bookmarks:" . "Bookmarks")))
     (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
     (setq dashboard-items '((recents  . 5)
                             (bookmarks . 5)))
