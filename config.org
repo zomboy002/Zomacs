@@ -272,8 +272,6 @@
     :ensure t
     :init
     (add-hook 'after-init-hook 'dashboard-refresh-buffer)
-    (add-hook 'dashboard-mode-hook 'my/dashboard-banner)
-    (setq dashboard-set-init-info nil)
     (setq dashboard-show-shortcuts nil)
     (setq dashboard-set-heading-icons t)
     (setq dashboard-set-file-icons t)
@@ -321,7 +319,7 @@
 
 *** Font
 #+BEGIN_SRC emacs-lisp
-  (add-to-list 'default-frame-alist '(font . "firacode nerd font-13"))
+  (add-to-list 'default-frame-alist '(font . "firacode nerd font-12"))
 #+END_SRC
 
 *** Hightlight Matching Braces
