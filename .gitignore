@@ -1,6 +1,7 @@
 /transient
 /auto-save-list
 bookmarks
+.org-id-locations
 /elpa
 /.cache
 config.el
