@@ -12,8 +12,8 @@
   * [[#Auto-Pairs][Autor Pairs]]
   * [[#System-Load][system Load]]
   * [[#Disable-Bell][Disable Bell]]
-  * [[#Keep-Files-Clean][Keep Files Clean]]
   * [[#Diminish-Mode][Diminish Mode]]
+  * [[#Keep-Files-Clean][Keep Files Clean]]
   * [[#Make-Scroll-Nicer][Make Scroll Nicer]]
   * [[#Set-UTF-8-Encoding][Set UTF-8 Encoding]]
   * [[#Kill-Buffer-Quickly][Kill Buffer Quickly]]
@@ -46,6 +46,7 @@
     * [[#Rainbow-Delimeter][Rainbow Delimeter]]
   * [[#Treemacs][Treemacs]] 
   * [[#SlideShow][SlideShow]]
+  * [[#Undo-Tree][Undo-Tree]]
   * [[#Emacs-Completions][Emacs Completions]]
   * [[#Writetroom-Mode][Writeroom Mode]]
   * [[#Sudo-Edit][Sudo Edit]]
@@ -397,6 +398,15 @@
     :ensure t)
 #+END_SRC
 
+** Undo tree
+#+BEGIN_SRC emacs-lisp
+  (use-package undo-tree
+    :ensure t
+    :init
+    (global-undo-tree-mode 1)
+    (setq evil-undo-system 'undo-tree))
+#+END_SRC
+
 ** Emacs Completions
 *** Company Mode
 #+BEGIN_SRC emacs-lisp
@@ -490,23 +500,24 @@
 
 ** Evil Mode
 #+BEGIN_SRC emacs-lisp
-  (use-package evil
-    :ensure t  
-    :init
-    (setq evil-want-keybinding t)
-    (setq evil-want-fine-undo t)
-    (setq evil-want-keybinding nil)
-    :config
-    (evil-set-initial-state 'dashboard-mode 'motion)
-    (evil-set-initial-state 'debugger-mode 'motion)
-    (evil-set-initial-state 'pdf-view-mode 'motion)
-    (evil-mode 1))
+    (use-package evil
+      :ensure t  
+      :init
+      (setq evil-want-keybinding t)
+      (setq evil-want-fine-undo t)
+      (setq evil-want-keybinding nil)
+      :config
+      (evil-set-initial-state 'dashboard-mode 'motion)
+      (evil-set-initial-state 'debugger-mode 'motion)
+      (setq evil-want-fine-undo nil)
+      (evil-set-initial-state 'pdf-view-mode 'motion)
+      (evil-mode 1))
 
-  (use-package evil-collection
-    :ensure t
-    :after evil
-    :init
-    (evil-collection-init))
+    (use-package evil-collection
+      :ensure t
+      :after evil
+      :init
+      (evil-collection-init))
 #+END_SRC
 
 ** Terminal
