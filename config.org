@@ -332,6 +332,9 @@
     (show-paren-mode 1))
 #+END_SRC
 
+** For Html
+#+BEGIN_SRC emacs-lisp
+#+END_SRC
 ** Gmch
 #+BEGIN_SRC emacs-lisp
     (use-package gcmh
@@ -412,18 +415,9 @@
 #+BEGIN_SRC emacs-lisp
   (use-package company
     :ensure t
-    :config
-    (setq company-idle-delay 1)
-    (setq company-minimum-prefix-length 3)
     :init
-    (company-mode 1))
+    (add-hook 'after-init-hook 'global-company-mode))
 
-  (with-eval-after-load 'company
-    (define-key company-active-map (kbd "M-n") nil)
-    (define-key company-active-map (kbd "M-p") nil)
-    (define-key company-active-map (kbd "C-n") #'company-select-next)
-    (define-key company-active-map (kbd "C-p") #'company-select-previous)
-    (define-key company-active-map (kbd "SPC") #'company-abort))
 #+END_SRC
 
 *** Vertico
