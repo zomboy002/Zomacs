@@ -66,6 +66,18 @@
     * [[#Windows][Windows]]
 
 * Setting
+** ERC
+#+BEGIN_SRC emacs-lisp
+(setq erc-server "irc.libera.chat"
+      erc-track-shorten-start 24
+      erc-nick "Zomboy001"
+      erc-kill-buffer-on-part t
+      erc-fill-column 100
+      erc-fill-function 'erc-fill-static
+      erc-fill-static-center 20
+      ;; erc-auto-query 'bury
+      )
+#+END_SRC
 ** Auto Pairs
 #+BEGIN_SRC emacs-lisp
   (setq electric-pair-pairs '(
