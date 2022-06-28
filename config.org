@@ -214,7 +214,7 @@
 #+BEGIN_SRC emacs-lisp
     (use-package doom-themes
       :ensure t)
-    (load-theme 'doom-tokyo-night t)
+    (load-theme 'doom-gruvbox t)
 #+END_SRC
 
 *** Icons
@@ -458,8 +458,7 @@
       :ensure t
       :config
       (setq writeroom-maximize-window nil
-            writeroom-header-line "                                                              Writer Mode"  
-            writeroom-mode-line nil
+            writeroom-mode-line 1 
             writeroom-global-effects nil) 
       (setq writeroom-width 80))
 #+END_SRC
